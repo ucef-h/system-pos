@@ -33,4 +33,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 docker-compose exec app bash 
 
 npx -p @angular/cli ng generate component servers
+
+npx -p @angular/cli ng g d better-highlight
+
 ```
