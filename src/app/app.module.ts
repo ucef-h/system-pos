@@ -11,6 +11,9 @@ import { ServerElementComponent } from './server-element/server-element.componen
 import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
 import { BetterHighlightDirective } from './better-highlight/better-highlight.directive';
 import { UnlessDirective } from './unless/unless.directive';
+import { NewAccountComponent } from './new-account/new-account.component';
+import { AccountComponent } from './account/account.component';
+import { LoggingService } from './services/logging.service';
 
 
 @NgModule({
@@ -22,14 +25,16 @@ import { UnlessDirective } from './unless/unless.directive';
     ServerElementComponent,
     BasicHighlightDirective,
     BetterHighlightDirective,
-    UnlessDirective
+    UnlessDirective,
+    AccountComponent,
+    NewAccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LoggingService],
   bootstrap: [AppComponent] // The Component that will be started at first
 })
 export class AppModule { }
