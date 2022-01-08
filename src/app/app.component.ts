@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AccountService } from './services/accounts.service';
+import { UserService } from './users/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +9,26 @@ import { AccountService } from './services/accounts.service';
   styleUrls: ['./app.component.css'],
   providers: [AccountService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private userService: UserService
+    ) {}
+
 
   ngOnInit(): void {
     this.accounts = this.accountService.accounts;
+
+    this. activatedSubject = this.userService.activatedEmitter.subscribe(didActivate => {
+      this.userActivated = didActivate;
+    });
   }
  
+  ngOnDestroy(): void {
+    this.activatedSubject.unsubscribe();
+  }
+
   /************************************************************/
   serverElements = [
     { type : 'server', name: 'TestServer', content: 'Just a test'}
@@ -40,4 +54,9 @@ export class AppComponent implements OnInit {
 
   accounts: {name: string, status: string}[] = [];
 
+  /************************************************************/
+
+  userActivated = false;
+
+  private activatedSubject: Subscription;
 }
