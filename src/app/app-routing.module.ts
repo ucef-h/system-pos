@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { HttpRequestComponent } from './http-request/http-request.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReactiveDrivenComponent } from './reactive-driven/reactive-driven.component';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
@@ -29,6 +30,7 @@ const  appRoutes: Routes = [
   ]},
   {path: 'template', component : TemplateDrivenComponent},
   {path: 'reactive', component : ReactiveDrivenComponent},
+  {path: 'http-request', component : HttpRequestComponent},
   {path: 'not-found', component : PageNotFoundComponent},
   {path: '**', redirectTo : 'not-found' },
 ];

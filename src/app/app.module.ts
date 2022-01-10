@@ -1,6 +1,7 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,9 @@ import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.s
 import { ServerResolver } from './servers/server/server-resolver.service';
 import { TemplateDrivenComponent } from './template-driven/template-driven.component';
 import { ReactiveDrivenComponent } from './reactive-driven/reactive-driven.component';
+import { HttpRequestComponent } from './http-request/http-request.component';
+import { AuthInterceptorService } from './http-request/aut-interceptor.service';
+import { LoggingInterceptor } from './http-request/logging-interceptor.service';
 
 
 @NgModule({
@@ -44,13 +48,15 @@ import { ReactiveDrivenComponent } from './reactive-driven/reactive-driven.compo
     ServerComponent,
     PageNotFoundComponent,
     TemplateDrivenComponent,
-    ReactiveDrivenComponent
+    ReactiveDrivenComponent,
+    HttpRequestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     LoggingService,
@@ -58,7 +64,17 @@ import { ReactiveDrivenComponent } from './reactive-driven/reactive-driven.compo
     AuthService,
     AuthGuard,
     CanDeactivateGuard,
-    ServerResolver
+    ServerResolver,
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthInterceptorService, 
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: LoggingInterceptor, 
+      multi: true
+    }
   ],
   bootstrap: [AppComponent] // The Component that will be started at first
 })
