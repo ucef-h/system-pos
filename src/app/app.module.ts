@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,8 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
 import { ServerResolver } from './servers/server/server-resolver.service';
+import { TemplateDrivenComponent } from './template-driven/template-driven.component';
+import { ReactiveDrivenComponent } from './reactive-driven/reactive-driven.component';
 
 
 @NgModule({
@@ -40,12 +42,15 @@ import { ServerResolver } from './servers/server/server-resolver.service';
     UserComponent,
     EditServerComponent,
     ServerComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TemplateDrivenComponent,
+    ReactiveDrivenComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     LoggingService,
